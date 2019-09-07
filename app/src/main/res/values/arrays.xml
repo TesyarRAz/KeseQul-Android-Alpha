@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="aksi_siswa_text">
+        <item>Share QR</item>
+        <item>Bayar SppQU</item>
+        <item>Transfer UangQU</item>
+        <item>Teman SekelasQu</item>
+        <item>Q-Nyoblos</item>
+    </string-array>
+    <string-array name="aksi_siswa_image">
+        <item>chat</item>
+        <item>date</item>
+        <item>bitcoin</item>
+        <item>contact</item>
+        <item>bookmark</item>
+    </string-array>
+    <string-array name="aksi_tu_text">
+        <item>Share QR</item>
+        <item>Topup</item>
+        <item>Transfer UangQU</item>
+    </string-array>
+    <string-array name="aksi_tu_image">
+        <item>chat</item>
+        <item>date</item>
+        <item>bitcoin</item>
+    </string-array>
+</resources>
