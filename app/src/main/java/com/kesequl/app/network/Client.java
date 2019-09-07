@@ -23,7 +23,7 @@ public class Client {
     public static Retrofit getConnection() {
         if (retrofit == null)
             retrofit = new Retrofit.Builder()
-                    .baseUrl("sekolahsequl.epizy.com/Api/")
+                    .baseUrl("http://sekolahsequl.epizy.com/Api/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
