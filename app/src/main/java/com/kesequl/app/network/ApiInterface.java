@@ -25,7 +25,7 @@ public interface ApiInterface {
     @GET("siswa/data")
     public Call<ResponseApi<Siswa>> actionMyDataSiswa(@Query("token") String token);
 
-    @PUT("siswa/spp")
+    @POST("siswa/spp")
     @FormUrlEncoded
     public Call<ResponseApi> actionBayarSpp(@Query("token") String token, @Field("bulan") String bulan);
 
@@ -35,11 +35,11 @@ public interface ApiInterface {
     @GET("user/data")
     public Call<ResponseApi<User>> actionMyDataUser(@Query("token") String token);
 
-    @PUT("tu/topup")
+    @POST("tu/topup")
     @FormUrlEncoded
     public Call<ResponseApi> actionTopup(@Query("token") String token, @Field("id_penerima") int id_user, @Field("uang_transfer") int uang);
 
-    @PUT("user/transfer")
+    @POST("user/transfer")
     @FormUrlEncoded
     public Call<ResponseApi> actionTransfer(@Query("token") String token, @Field("id_penerima") int id_user, @Field("uang_transfer") int uang);
 
@@ -58,4 +58,7 @@ public interface ApiInterface {
 
     @GET("voting/team")
     public Call<ResponseList<VotingTeam>> actionGetEventTeam(@Query("token") String token, @Query("id_event_voting") int id_event_voting, @Query("password") String password);
+    
+    @POST("voting/coblos")
+    public Call<ResponseApi> actionCoblos(@Query("token") String token, @Field("id_team_pilihan") int id_team, @Field("password") String password);
 }
