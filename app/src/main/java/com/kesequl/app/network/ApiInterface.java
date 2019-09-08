@@ -63,4 +63,3 @@ public interface ApiInterface {
     @FormUrlEncoded
     public Call<ResponseApi> actionCoblos(@Query("token") String token, @Field("id_team_pilihan") String id_team, @Field("password") String password);
 }
-    
