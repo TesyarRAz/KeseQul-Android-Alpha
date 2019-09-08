@@ -33,6 +33,8 @@ import retrofit2.Response;
 
 public class TopupActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
     ZXingScannerView scannerTopup;
+    private EditText edtUsername;
+    private Button btnEksekusi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,22 @@ public class TopupActivity extends AppCompatActivity implements ZXingScannerView
 
         scannerTopup = findViewById(R.id.scanner_barcode);
         scannerTopup.setAutoFocus(true);
+
+        edtUsername = findViewById(R.id.edt_data_barcode);
+        btnEksekusi = findViewById(R.id.btn_eksekusi_barcode);
+
+        edtUsername.setHint("Masukan Username Tujuan");
+
+        btnEksekusi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String username = edtUsername.getText().toString().trim();
+
+                if (!TextUtils.isEmpty(username)) {
+                    validasiTopup(username);
+                }
+            }
+        });
     }
 
     @Override
@@ -66,6 +84,10 @@ public class TopupActivity extends AppCompatActivity implements ZXingScannerView
     public void handleResult(Result result) {
         String username = result.getText();
 
+        validasiTopup(username);
+    }
+
+    private void validasiTopup(String username) {
         if (username != null && !TextUtils.isEmpty(username)) {
             Client.getApi().actionCekUsername(Global.getUser().getToken(), username).enqueue(new Callback<ResponseApi>() {
                 @Override
