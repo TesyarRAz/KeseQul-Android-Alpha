@@ -44,6 +44,10 @@ public class MenuHomeAdapter extends RecyclerView.Adapter<MenuHomeAdapter.MenuHo
             imageId = R.drawable.jadi_siswa;
         else if (namaLevel.equals("TU"))
             imageId = R.drawable.tu_or_admin;
+        else if (namaLevel.equals("SUPERADMIN"))
+            imageId = R.drawable.kepala_sekolah;
+        else if (namaLevel.equals("GURU"))
+            imageId = R.drawable.tu_or_admin;
 
         if (imageId != 0)
             holder.imageView.setImageResource(imageId);

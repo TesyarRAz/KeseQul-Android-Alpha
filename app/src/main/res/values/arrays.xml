@@ -24,4 +24,12 @@
         <item>date</item>
         <item>logo_transfer</item>
     </string-array>
+    <string-array name="aksi_guru_text">
+        <item>Share QR</item>
+        <item>Transfer UangQU</item>
+    </string-array>
+    <string-array name="aksi_guru_image">
+        <item>chat</item>
+        <item>logo_transfer</item>
+    </string-array>
 </resources>
