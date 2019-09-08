@@ -1,13 +1,23 @@
 package com.kesequl.app.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.kesequl.app.Global;
 import com.kesequl.app.R;
+import com.kesequl.app.model.ResponseApi;
+import com.kesequl.app.network.Client;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class VotingDetailActivity extends AppCompatActivity {
     TextView txtKetua, txtKetuaKelas, txtWakil, txtWakilKelas, txtVisi, txtMisi;
@@ -41,7 +51,7 @@ public class VotingDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 new AlertDialog.Builder(VotingDetailActivity.this)
                         .setMessage("Yakin Ingin Memilih Yang Ini ?")
-                        .setCancelabel(false)
+                        .setCancelable(false)
                         .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -51,7 +61,7 @@ public class VotingDetailActivity extends AppCompatActivity {
                                             if (response.isSuccessful()) {
                                                 if (response.body().getStatus() == 1) {
                                                     new AlertDialog.Builder(VotingDetailActivity.this)
-                                                            .setMessage(response.getPesan())
+                                                            .setMessage(response.body().getPesan())
                                                             .setOnDismissListener(new DialogInterface.OnDismissListener() {
                                                                 @Override
                                                                 public void onDismiss(DialogInterface dialogInterface) {
@@ -78,7 +88,7 @@ public class VotingDetailActivity extends AppCompatActivity {
                                                     .show();
                                         }
                                     });
-                                });
+                                }
                         })
                         .setNegativeButton("Batalkan", new DialogInterface.OnClickListener() {
                                 @Override
