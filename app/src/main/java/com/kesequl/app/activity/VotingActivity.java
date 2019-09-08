@@ -38,6 +38,8 @@ public class VotingActivity extends AppCompatActivity implements ZXingScannerVie
         edtPassword = findViewById(R.id.edt_data_barcode);
         btnEksekusi = findViewById(R.id.btn_eksekusi_barcode);
 
+        edtPassword.setHint("Masukan Password Tujuan");
+
         btnEksekusi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
