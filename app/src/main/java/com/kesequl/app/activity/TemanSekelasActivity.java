@@ -32,15 +32,16 @@ public class TemanSekelasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teman_sekelas);
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading ...");
-        progressDialog.setIndeterminate(true);
-        progressDialog.setCancelable(false);
-
 
         listTemanSekelas = findViewById(R.id.list_teman_sekelas);
         listTemanSekelas.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading ...");
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
         Client.getApi().actionGetTemanSekelas(Global.getUser().getToken()).enqueue(new Callback<ResponseList<Siswa>>() {
             @Override
             public void onResponse(Call<ResponseList<Siswa>> call, Response<ResponseList<Siswa>> response) {
