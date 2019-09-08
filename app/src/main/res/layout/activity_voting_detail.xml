@@ -8,9 +8,10 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:layout_marginBottom="20dp">
-        
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -92,8 +93,8 @@
 
 
                 <LinearLayout
-                    android:layout_height="match_parent"
-                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
                     android:orientation="vertical">
 
                     <TextView
@@ -113,8 +114,8 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_height="match_parent"
-                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
                     android:orientation="vertical">
 
                     <TextView
@@ -140,23 +141,23 @@
     </ScrollView>
 
     <LinearLayout
-            android:layout_width="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right">
+
+        <Button
+            android:id="@+id/btn_team_coblos"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="right">
+            android:layout_weight="1"
+            android:text="Coblos"/>
+        <Button
+            android:id="@+id/btn_team_batal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Lihat Calon Lain"/>
 
-            <Button
-                android:id="@+id/btn_team_coblos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Coblos"/>
-            <Button
-                android:id="@+id/btn_team_batal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Lihat Calon Lain"/>
-
-        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>
