@@ -67,4 +67,35 @@ public class VotingTeamActivity extends AppCompatActivity {
         else
             finish();
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ACTIVITY_CONSTANT) {
+            if (resultCode == RESULT_OK) {
+                finish();
+            }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+            .setMessage("Yakin Ingin Ke menu awal ?")
+            .setCancelable(false)
+            .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    finish();
+                }
+            })
+            .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            })
+            .show();
+    }
+
 }

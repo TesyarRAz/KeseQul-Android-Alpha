@@ -60,5 +60,5 @@ public interface ApiInterface {
     public Call<ResponseList<VotingTeam>> actionGetEventTeam(@Query("token") String token, @Query("id_event_voting") int id_event_voting, @Query("password") String password);
     
     @POST("voting/coblos")
-    public Call<ResponseApi> actionCoblos(@Query("token") String token, @Field("id_team_pilihan") int id_team, @Field("password") String password);
+    public Call<ResponseApi> actionCoblos(@Query("token") String token, @Field("id_team_pilihan") String id_team, @Field("password") String password);
 }

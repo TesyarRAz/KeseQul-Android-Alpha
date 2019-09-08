@@ -83,6 +83,7 @@ public class VotingActivity extends AppCompatActivity implements ZXingScannerVie
                                 intent.putExtra("password", eventVoting.getPassword());
 
                                 startActivity(intent);
+                                finish();
                             }
                         }
                     } else {
