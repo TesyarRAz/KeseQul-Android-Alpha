@@ -56,7 +56,6 @@ public class VotingActivity extends AppCompatActivity implements ZXingScannerVie
     protected void onResume() {
         super.onResume();
 
-
         scannerVoting.setResultHandler(this);
         scannerVoting.startCamera();
     }
@@ -84,6 +83,10 @@ public class VotingActivity extends AppCompatActivity implements ZXingScannerVie
 
                                 startActivity(intent);
                                 finish();
+                            } else {
+                                new AlertDialog.Builder(VotingActivity.this)
+                                    .setMessage(response.message())
+                                    .show();
                             }
                         } else {
                             new AlertDialog.Builder(VotingActivity.this)
