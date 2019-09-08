@@ -5,36 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardElevation="10dp"
-    app:cardCornerRadius="10dp"
-    android:layout_margin="10dp">
+    app:cardCornerRadius="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="5dp">
+
         <TextView
             android:id="@+id/txt_voting_team"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Team 1"
-            android:textSize="30dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorPrimary"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:padding="25dp"
+            android:padding="10dp"
             android:gravity="center"
             android:orientation="horizontal">
 
             <ImageView
+                android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/vektor"
-                android:layout_gravity="center"/>
+                android:src="@drawable/vektor"/>
 
             <ImageView
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"

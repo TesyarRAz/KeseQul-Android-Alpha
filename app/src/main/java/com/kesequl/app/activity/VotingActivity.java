@@ -93,6 +93,7 @@ public class VotingActivity extends AppCompatActivity implements ZXingScannerVie
                             new AlertDialog.Builder(VotingActivity.this)
                                 .setMessage(response.body().getPesan())
                                 .show();
+                            finish();
                         }
                     }
                 }

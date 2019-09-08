@@ -5,37 +5,50 @@
     android:layout_height="match_parent"
     android:padding="12dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Arahkan Kamera Ke daerah Barcode"/>
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
 
-    <me.dm7.barcodescanner.zxing.ZXingScannerView
-        android:id="@+id/scanner_barcode"
-        android:layout_gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginTop="20dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp">
-        <EditText
-            android:id="@+id/edt_data_barcode"
+        <LinearLayout
+            android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Hint Data"
-            android:layout_margin="10dp"/>
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_eksekusi_barcode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Eksekusi"/>
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Arahkan Kamera Ke daerah Barcode"/>
+
+            <me.dm7.barcodescanner.zxing.ZXingScannerView
+                android:id="@+id/scanner_barcode"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="20dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+                <EditText
+                    android:id="@+id/edt_data_barcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Hint Data"
+                    android:layout_margin="10dp"/>
+
+                <Button
+                    android:id="@+id/btn_eksekusi_barcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Eksekusi"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
