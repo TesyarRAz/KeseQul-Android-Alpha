@@ -47,12 +47,7 @@ public class VotingTeamActivity extends AppCompatActivity {
                 public void onResponse(Call<ResponseList<VotingTeam>> call, Response<ResponseList<VotingTeam>> response) {
                     if (response.isSuccessful()) {
                         if (response.body().getStatus() == 1) {
-                            listVotingTeam.setAdapter(
-                                    new MenuVotingAdapter(
-                                            VotingTeamActivity.this,
-                                            intent.getStringExtra("password"),
-                                            response.body().getData())
-                            );
+                            listVotingTeam.setAdapter(new MenuVotingAdapter(VotingTeamActivity.this, intent.getStringExtra("password"), response.body().getData()));
                         }
                     }
                 }

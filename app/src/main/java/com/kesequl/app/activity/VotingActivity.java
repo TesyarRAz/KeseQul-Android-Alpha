@@ -61,6 +61,12 @@ public class VotingActivity extends AppCompatActivity implements ZXingScannerVie
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        scannerTopup.stopCamera();
+    }
+
+    @Override
     public void handleResult(Result result) {
         validasiTeam(result.getText());
     }
@@ -75,19 +81,14 @@ public class VotingActivity extends AppCompatActivity implements ZXingScannerVie
                     if (response.isSuccessful()) {
                         if (response.body().getStatus() == 1) {
                             EventVoting eventVoting = response.body().getData();
-                            if (response.body().getStatus() == 1) {
-                                Intent intent = new Intent(VotingActivity.this, VotingTeamActivity.class);
-                                intent.putExtra("id_event_voting", eventVoting.getIdEventVoting());
-                                intent.putExtra("nama_event", eventVoting.getNama());
-                                intent.putExtra("password", eventVoting.getPassword());
+                            
+                            Intent intent = new Intent(VotingActivity.this, VotingTeamActivity.class);
+                            intent.putExtra("id_event_voting", eventVoting.getIdEventVoting());
+                            intent.putExtra("nama_event", eventVoting.getNama());
+                            intent.putExtra("password", eventVoting.getPassword());
 
-                                startActivity(intent);
-                                finish();
-                            } else {
-                                new AlertDialog.Builder(VotingActivity.this)
-                                    .setMessage(response.message())
-                                    .show();
-                            }
+                            startActivity(intent);
+                            finish();
                         } else {
                             new AlertDialog.Builder(VotingActivity.this)
                                 .setMessage(response.message())
