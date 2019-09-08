@@ -90,6 +90,14 @@
             android:textAlignment="center"
             android:text="Visi Saya Adalah"/>
 
+        <TextView
+            android:id="@+id/txt_team_misi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="8"
+            android:textAlignment="center"
+            android:text="Misi Saya Adalah"/>
+
     </LinearLayout>
 
 

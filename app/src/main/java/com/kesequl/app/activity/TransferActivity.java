@@ -30,6 +30,8 @@ import retrofit2.Response;
 
 public class TransferActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
     private ZXingScannerView scannerTransfer;
+    private EditText edtUsername;
+    private Button btnEksekusi;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +45,23 @@ public class TransferActivity extends AppCompatActivity implements ZXingScannerV
 
         scannerTransfer = findViewById(R.id.scanner_barcode);
         scannerTransfer.setAutoFocus(true);
+
+        edtUsername = findViewById(R.id.edt_data_barcode);
+        btnEksekusi = findViewById(R.id.btn_eksekusi_barcode);
+
+        edtUsername.setHint("Masukan Username Tujuan");
+
+        btnEksekusi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String username = edtUsername.getText().toString().trim();
+
+                if (!TextUtils.isEmpty(username)) {
+                    validasiTransfer(username);
+                }
+            }
+        });
+
     }
 
     @Override
@@ -63,6 +82,10 @@ public class TransferActivity extends AppCompatActivity implements ZXingScannerV
     public void handleResult(Result result) {
         String username = result.getText();
 
+        validasiTransfer(username);
+    }
+
+    private void validasiTransfer(String username) {
         if (username != null && !TextUtils.isEmpty(username)) {
             Client.getApi().actionCekUsername(Global.getUser().getToken(), username).enqueue(new Callback<ResponseApi>() {
                 @Override
