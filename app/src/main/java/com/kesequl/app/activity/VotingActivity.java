@@ -63,7 +63,7 @@ public class VotingActivity extends AppCompatActivity implements ZXingScannerVie
     @Override
     protected void onPause() {
         super.onPause();
-        scannerTopup.stopCamera();
+        scannerVoting.stopCamera();
     }
 
     @Override
