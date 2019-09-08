@@ -43,14 +43,16 @@ public class MenuVotingAdapter extends RecyclerView.Adapter<MenuVotingAdapter.Me
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(activity, VotingDetailActivity.class);
+                intent.putExtra("id_nominasi_team", team.getIdNominasiTeam());
                 intent.putExtra("nama_ketua", team.getNamaKetua());
                 intent.putExtra("nama_wakil", team.getNamaWakil());
                 intent.putExtra("kelas_ketua", team.getKelasKetua());
                 intent.putExtra("kelas_wakil", team.getKelasWakil());
                 intent.putExtra("visi", team.getVisi());
                 intent.putExtra("misi", team.getMisi());
+                intent.putExtra("password", password);
 
-                activity.startActivity(intent);
+                activity.startActivityForResult(intent, 1);
             }
         });
     }
