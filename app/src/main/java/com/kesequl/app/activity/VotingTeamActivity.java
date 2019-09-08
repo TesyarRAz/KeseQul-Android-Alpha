@@ -49,6 +49,16 @@ public class VotingTeamActivity extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         if (response.body().getStatus() == 1) {
                             listVotingTeam.setAdapter(new MenuVotingAdapter(VotingTeamActivity.this, intent.getStringExtra("password"), response.body().getData()));
+                        } else {
+                            new AlertDialog.Builder(VotingTeamActivity.this)
+                            .setMessage(response.body().getPesan())
+                            .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialogInterface) {
+                                        finish();
+                                    }
+                                })
+                            .show();
                         }
                     }
                 }
@@ -57,8 +67,13 @@ public class VotingTeamActivity extends AppCompatActivity {
                 public void onFailure(Call<ResponseList<VotingTeam>> call, Throwable t) {
                     new AlertDialog.Builder(VotingTeamActivity.this)
                             .setMessage(t.getMessage())
+                            .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialogInterface) {
+                                        finish();
+                                    }
+                                })
                             .show();
-                    finish();
                 }
             });
         else
