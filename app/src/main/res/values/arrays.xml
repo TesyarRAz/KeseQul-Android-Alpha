@@ -10,7 +10,7 @@
     <string-array name="aksi_siswa_image">
         <item>chat</item>
         <item>date</item>
-        <item>bitcoin</item>
+        <item>logo_transfer</item>
         <item>contact</item>
         <item>bookmark</item>
     </string-array>
@@ -22,6 +22,6 @@
     <string-array name="aksi_tu_image">
         <item>chat</item>
         <item>date</item>
-        <item>bitcoin</item>
+        <item>logo_transfer</item>
     </string-array>
 </resources>

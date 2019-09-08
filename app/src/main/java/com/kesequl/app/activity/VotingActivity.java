@@ -85,11 +85,11 @@ public class VotingActivity extends AppCompatActivity implements ZXingScannerVie
                                 startActivity(intent);
                                 finish();
                             }
-                        }
-                    } else {
-                        new AlertDialog.Builder(VotingActivity.this)
+                        } else {
+                            new AlertDialog.Builder(VotingActivity.this)
                                 .setMessage(response.message())
                                 .show();
+                        }
                     }
                 }
 
