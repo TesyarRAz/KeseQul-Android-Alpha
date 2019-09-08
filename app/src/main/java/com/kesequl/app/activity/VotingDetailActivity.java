@@ -59,18 +59,16 @@ public class VotingDetailActivity extends AppCompatActivity {
                                         @Override
                                         public void onResponse(Call<ResponseApi> call, final Response<ResponseApi> response) {
                                             if (response.isSuccessful()) {
-                                                if (response.body().getStatus() == 1) {
-                                                    new AlertDialog.Builder(VotingDetailActivity.this)
-                                                            .setMessage(response.body().getPesan())
-                                                            .setOnDismissListener(new DialogInterface.OnDismissListener() {
-                                                                @Override
-                                                                public void onDismiss(DialogInterface dialogInterface) {
-                                                                    setResult(RESULT_OK, null);
-                                                                    finish();
-                                                                }
-                                                            })
-                                                            .show();
-                                                }
+                                                new AlertDialog.Builder(VotingDetailActivity.this)
+                                                        .setMessage(response.body().getPesan())
+                                                        .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                                            @Override
+                                                            public void onDismiss(DialogInterface dialogInterface) {
+                                                                setResult(RESULT_OK, null);
+                                                                finish();
+                                                            }
+                                                        })
+                                                        .show();
                                             }
                                         }
 
