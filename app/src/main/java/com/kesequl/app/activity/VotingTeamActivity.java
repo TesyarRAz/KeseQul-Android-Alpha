@@ -39,6 +39,7 @@ public class VotingTeamActivity extends AppCompatActivity {
         String id = intent.getStringExtra("id_event_voting");
         if (id == null)
             return;
+        
         int id_event_voting = Integer.parseInt(id);
 
         if (id_event_voting != -1)

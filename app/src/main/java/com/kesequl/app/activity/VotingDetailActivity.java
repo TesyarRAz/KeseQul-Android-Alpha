@@ -20,7 +20,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class VotingDetailActivity extends AppCompatActivity {
-    TextView txtKetua, txtKetuaKelas, txtWakil, txtWakilKelas, txtVisi, txtMisi;
+    TextView txtNamaTeam, txtKetua, txtKetuaKelas, txtWakil, txtWakilKelas, txtVisi, txtMisi;
     Button btnCoblos, btnBatal;
 
     @Override
@@ -28,6 +28,7 @@ public class VotingDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voting_detail);
 
+        txtNamaTeam = findViewById(R.id.txt_team_nama);
         txtKetua = findViewById(R.id.txt_team_ketua);
         txtKetuaKelas = findViewById(R.id.txt_team_kelas_ketua);
         txtWakil = findViewById(R.id.txt_team_wakil);
@@ -39,12 +40,20 @@ public class VotingDetailActivity extends AppCompatActivity {
         btnBatal = findViewById(R.id.btn_team_batal);
 
         final Intent intent = getIntent();
+        txtNamaTeam.setText(intent.getStringExtra("nama_team"));
         txtKetua.setText(intent.getStringExtra("nama_ketua"));
         txtKetuaKelas.setText(intent.getStringExtra("kelas_ketua"));
         txtWakil.setText(intent.getStringExtra("nama_wakil"));
         txtWakilKelas.setText(intent.getStringExtra("kelas_wakil"));
         txtVisi.setText(intent.getStringExtra("visi"));
         txtMisi.setText(intent.getStringExtra("misi"));
+
+        btnBatal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         btnCoblos.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +74,7 @@ public class VotingDetailActivity extends AppCompatActivity {
                                                             @Override
                                                             public void onDismiss(DialogInterface dialogInterface) {
                                                                 setResult(RESULT_OK, null);
-                                                                finish();
+                                                                finishActivity(1);
                                                             }
                                                         })
                                                         .show();
@@ -80,7 +89,7 @@ public class VotingDetailActivity extends AppCompatActivity {
                                                                 @Override
                                                                 public void onDismiss(DialogInterface dialogInterface) {
                                                                     setResult(RESULT_OK, null);
-                                                                    finish();
+                                                                    finishActivity(1);
                                                                 }
                                                             })
                                                     .show();
@@ -91,7 +100,7 @@ public class VotingDetailActivity extends AppCompatActivity {
                         .setNegativeButton("Batalkan", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    finish();
+                                    dialogInterface.dismiss();
                                 }
                         })
                         .show();
