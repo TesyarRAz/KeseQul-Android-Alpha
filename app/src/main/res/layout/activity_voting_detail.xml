@@ -9,7 +9,6 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:layout_marginBottom="20dp">
 
         <LinearLayout
@@ -21,123 +20,125 @@
             <TextView
                 android:id="@+id/txt_team_nama"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:layout_margin="10dp"
+                android:layout_margin="20dp"
                 android:text="Team"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
 
-            <LinearLayout
+            <androidx.cardview.widget.CardView
+                android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="10dp">
-
-                <TextView
-                    android:text="Data Diri Ketua"
-                    android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:layout_marginBottom="5dp"/>
-
-                <TextView
-                    android:id="@+id/txt_team_ketua"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nama Ketua"/>
-
-                <TextView
-                    android:id="@+id/txt_team_kelas_ketua"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Kelas Ketua"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:text="Data Diri Wakil"
-                    android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:layout_marginBottom="5dp"/>
-
-                <TextView
-                    android:id="@+id/txt_team_wakil"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nama Wakil"/>
-
-                <TextView
-                    android:id="@+id/txt_team_kelas_wakil"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Kelas Wakil"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="5dp">
-
+                android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="15dp">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:text="Data Diri Ketua"
                         android:gravity="center"
-                        android:text="Visi :"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
-
-                    <TextView
-                        android:id="@+id/txt_team_visi"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:lines="8"
-                        android:text="Visi Saya"/>
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:layout_marginBottom="5dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:layout_marginRight="10dp"
+                            android:text="Nama :"/>
+                        <TextView
+                            android:id="@+id/txt_team_ketua"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Nama Ketua"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:layout_marginRight="10dp"
+                            android:text="Kelas  :"/>
+                        <TextView
+                            android:id="@+id/txt_team_kelas_ketua"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Kelas Ketua"/>
+                    </LinearLayout>
 
                 </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
                 <LinearLayout
-                    android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="15dp">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:text="Data Diri Wakil"
                         android:gravity="center"
-                        android:text="Misi :"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
-
-                    <TextView
-                        android:id="@+id/txt_team_misi"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:lines="8"
-                        android:text="Visi Saya"/>
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:layout_marginBottom="5dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:layout_marginRight="10dp"
+                            android:text="Nama :"/>
+                        <TextView
+                            android:id="@+id/txt_team_wakil"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Nama Wakil"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:layout_marginRight="10dp"
+                            android:text="Kelas  :"/>
+                        <TextView
+                            android:id="@+id/txt_team_kelas_wakil"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Kelas Wakil"/>
+                    </LinearLayout>
 
                 </LinearLayout>
-
-            </LinearLayout>
-
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
 
     </ScrollView>

@@ -20,7 +20,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class VotingDetailActivity extends AppCompatActivity {
-    TextView txtNamaTeam, txtKetua, txtKetuaKelas, txtWakil, txtWakilKelas, txtVisi, txtMisi;
+    TextView txtNamaTeam, txtKetua, txtKetuaKelas, txtWakil, txtWakilKelas;
     Button btnCoblos, btnBatal;
 
     @Override
@@ -33,8 +33,6 @@ public class VotingDetailActivity extends AppCompatActivity {
         txtKetuaKelas = findViewById(R.id.txt_team_kelas_ketua);
         txtWakil = findViewById(R.id.txt_team_wakil);
         txtWakilKelas = findViewById(R.id.txt_team_kelas_wakil);
-        txtVisi = findViewById(R.id.txt_team_visi);
-        txtMisi = findViewById(R.id.txt_team_misi);
 
         btnCoblos = findViewById(R.id.btn_team_coblos);
         btnBatal = findViewById(R.id.btn_team_batal);
@@ -45,8 +43,6 @@ public class VotingDetailActivity extends AppCompatActivity {
         txtKetuaKelas.setText(intent.getStringExtra("kelas_ketua"));
         txtWakil.setText(intent.getStringExtra("nama_wakil"));
         txtWakilKelas.setText(intent.getStringExtra("kelas_wakil"));
-        txtVisi.setText(intent.getStringExtra("visi"));
-        txtMisi.setText(intent.getStringExtra("misi"));
 
         btnBatal.setOnClickListener(new View.OnClickListener() {
             @Override

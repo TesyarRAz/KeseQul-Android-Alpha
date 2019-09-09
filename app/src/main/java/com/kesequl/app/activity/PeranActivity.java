@@ -68,6 +68,7 @@ public class PeranActivity extends AppCompatActivity {
 
         listMenuPeran.setHasFixedSize(true);
         listMenuPeran.setLayoutManager(new GridLayoutManager(this, 2));
+        listMenuPeran.setLayoutFrozen(false);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Sedang Meloading...");
@@ -104,8 +105,6 @@ public class PeranActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        progressDialog.hide();
     }
 
     private void createDatadiri() throws IOException {
@@ -133,6 +132,7 @@ public class PeranActivity extends AppCompatActivity {
         Client.getApi().actionMyDataUser(Global.getUser().getToken()).enqueue(new Callback<ResponseApi<User>>() {
             @Override
             public void onResponse(Call<ResponseApi<User>> call, Response<ResponseApi<User>> response) {
+                progressDialog.hide();
                 if (!Client.isTokenExpired(PeranActivity.this, response.body().getStatus())) {
                     if (response.body().getStatus() == 1) {
                         String token = Global.getUser().getToken();
@@ -148,6 +148,7 @@ public class PeranActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseApi<User>> call, Throwable t) {
+                progressDialog.hide();
                 new AlertDialog.Builder(PeranActivity.this)
                         .setMessage(t.getMessage())
                         .show();
