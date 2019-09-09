@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -94,7 +95,7 @@ public class PeranActivity extends AppCompatActivity {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplication());
+                SharedPreferences sharedPreferences = getSharedPreferences("login_setting", Context.MODE_PRIVATE);
                 sharedPreferences.edit().remove("username");
                 sharedPreferences.edit().remove("password");
                 sharedPreferences.edit().apply();
@@ -192,7 +193,7 @@ public class PeranActivity extends AppCompatActivity {
                     .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplication());
+                            SharedPreferences sharedPreferences = getSharedPreferences("login_setting", Context.MODE_PRIVATE);
                             sharedPreferences.edit().remove("username");
                             sharedPreferences.edit().remove("password");
                             sharedPreferences.edit().apply();

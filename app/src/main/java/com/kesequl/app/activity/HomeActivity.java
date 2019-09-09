@@ -1,5 +1,6 @@
 package com.kesequl.app.activity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -37,7 +38,7 @@ public class HomeActivity extends AppCompatActivity {
                 .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplication());
+                        SharedPreferences sharedPreferences = getSharedPreferences("login_setting", Context.MODE_PRIVATE);
                         sharedPreferences.edit().remove("username");
                         sharedPreferences.edit().remove("password");
                         sharedPreferences.edit().apply();

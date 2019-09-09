@@ -139,8 +139,13 @@ public class TransferActivity extends AppCompatActivity implements ZXingScannerV
                                                 public void onFailure(Call<ResponseApi> call, Throwable t) {
                                                     new AlertDialog.Builder(TransferActivity.this)
                                                             .setMessage("Error : " + t.getMessage())
+                                                            .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                                                @Override
+                                                                public void onDismiss(DialogInterface dialogInterface) {
+                                                                    finish();
+                                                                }
+                                                            })
                                                             .show();
-                                                    finish();
                                                 }
                                             });
                                         }
@@ -163,8 +168,13 @@ public class TransferActivity extends AppCompatActivity implements ZXingScannerV
                 public void onFailure(Call<ResponseApi> call, Throwable t) {
                     new AlertDialog.Builder(TransferActivity.this)
                             .setMessage(t.getMessage())
+                            .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                @Override
+                                public void onDismiss(DialogInterface dialogInterface) {
+                                    finish();
+                                }
+                            })
                             .show();
-                    finish();
                 }
             });
         }

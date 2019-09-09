@@ -3,6 +3,7 @@ package com.kesequl.app.activity;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -92,8 +93,13 @@ public class VotingActivity extends AppCompatActivity implements ZXingScannerVie
                         } else {
                             new AlertDialog.Builder(VotingActivity.this)
                                 .setMessage(response.body().getPesan())
+                                .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialogInterface) {
+                                        finish();
+                                    }
+                                })
                                 .show();
-                            finish();
                         }
                     }
                 }
@@ -102,6 +108,12 @@ public class VotingActivity extends AppCompatActivity implements ZXingScannerVie
                 public void onFailure(Call<ResponseApi<EventVoting>> call, Throwable t) {
                     new AlertDialog.Builder(VotingActivity.this)
                             .setMessage(t.getMessage())
+                            .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                @Override
+                                public void onDismiss(DialogInterface dialogInterface) {
+                                    finish();
+                                }
+                            })
                             .show();
                 }
             });

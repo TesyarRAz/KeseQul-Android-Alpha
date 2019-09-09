@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplication());
+        SharedPreferences sharedPreferences = getSharedPreferences("login_setting", Context.MODE_PRIVATE);
         String username = sharedPreferences.getString("username", "");
         String password = sharedPreferences.getString("password", "");
 
