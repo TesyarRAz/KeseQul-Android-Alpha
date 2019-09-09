@@ -22,7 +22,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="10dp"
-                android:layout_marginBottom="40dp"
                 android:background="@color/kesequl_primary">
                 <TextView
                     android:id="@+id/btn_logout"
