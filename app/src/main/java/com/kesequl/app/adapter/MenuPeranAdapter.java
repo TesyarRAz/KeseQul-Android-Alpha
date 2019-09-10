@@ -184,31 +184,39 @@ public class MenuPeranAdapter extends RecyclerView.Adapter<MenuPeranAdapter.Menu
                         Client.getApi().actionBayarSpp(Global.getUser().getToken(), String.valueOf(bulan)).enqueue(new Callback<ResponseApi>() {
                             @Override
                             public void onResponse(Call<ResponseApi> call, Response<ResponseApi> response) {
-                                if (!Client.isTokenExpired(activity, response.body().getStatus())) {
+                                if (response.isSuccessful()) {
+                                    if (!Client.isTokenExpired(activity, response.body().getStatus())) {
 
-                                    if (response.body().getStatus() == 1) {
-                                        dialogInterface.dismiss();
+                                        if (response.body().getStatus() == 1) {
+                                            dialogInterface.dismiss();
 
-                                        new AlertDialog.Builder(activity)
-                                                .setMessage("Berhasil")
-                                                .setCancelable(true)
-                                                .show();
-                                    } else {
-                                        dialogInterface.dismiss();
+                                            new AlertDialog.Builder(activity)
+                                                    .setMessage("Berhasil")
+                                                    .setCancelable(true)
+                                                    .show();
+                                        } else {
+                                            dialogInterface.dismiss();
 
-                                        new AlertDialog.Builder(activity)
-                                                .setMessage(response.body().getPesan())
-                                                .setCancelable(true)
-                                                .show();
+                                            new AlertDialog.Builder(activity)
+                                                    .setMessage(response.body().getPesan())
+                                                    .setCancelable(true)
+                                                    .show();
+                                        }
+
+                                        activity.refreshUser();
                                     }
-
-                                    activity.refreshUser();
+                                } else {
+                                    new AlertDialog.Builder(activity)
+                                            .setMessage(response.message())
+                                            .show();
                                 }
                             }
 
                             @Override
                             public void onFailure(Call<ResponseApi> call, Throwable t) {
-
+                                new AlertDialog.Builder(activity)
+                                        .setMessage(t.getMessage())
+                                        .show();
                             }
                         });
                     }

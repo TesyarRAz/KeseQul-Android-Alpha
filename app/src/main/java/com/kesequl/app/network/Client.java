@@ -23,7 +23,7 @@ public class Client {
     public static Retrofit getConnection() {
         if (retrofit == null)
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.43.126/kesequl-alpha/Api/")
+                    .baseUrl("https://kesequl.exposei.com/Api/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 

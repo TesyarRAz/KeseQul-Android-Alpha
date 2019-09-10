@@ -41,7 +41,8 @@ public class TemanSekelasActivity extends AppCompatActivity {
         progressDialog.setMessage("Loading ...");
         progressDialog.setIndeterminate(true);
         progressDialog.setCancelable(false);
-        progressDialog.show();
+        progressDialog.show();  
+
         Client.getApi().actionGetTemanSekelas(Global.getUser().getToken()).enqueue(new Callback<ResponseList<Siswa>>() {
             @Override
             public void onResponse(Call<ResponseList<Siswa>> call, Response<ResponseList<Siswa>> response) {

@@ -3,6 +3,7 @@ package com.kesequl.app.activity;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +23,8 @@ import retrofit2.Response;
 public class VotingDetailActivity extends AppCompatActivity {
     TextView txtNamaTeam, txtKetua, txtKetuaKelas, txtWakil, txtWakilKelas;
     Button btnCoblos, btnBatal;
+
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,10 @@ public class VotingDetailActivity extends AppCompatActivity {
                 finish();
             }
         });
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Sedang Meloading...");
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(false);
 
         btnCoblos.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,12 +67,26 @@ public class VotingDetailActivity extends AppCompatActivity {
                         .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
+                                    progressDialog.show();
                                     Client.getApi().actionCoblos(Global.getUser().getToken(), intent.getStringExtra("id_nominasi_team"), intent.getStringExtra("password")).enqueue(new Callback<ResponseApi>() {
                                         @Override
                                         public void onResponse(Call<ResponseApi> call, final Response<ResponseApi> response) {
+
+                                            progressDialog.hide();
                                             if (response.isSuccessful()) {
                                                 new AlertDialog.Builder(VotingDetailActivity.this)
                                                         .setMessage(response.body().getPesan())
+                                                        .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                                            @Override
+                                                            public void onDismiss(DialogInterface dialogInterface) {
+                                                                setResult(RESULT_OK, null);
+                                                                finishActivity(1);
+                                                            }
+                                                        })
+                                                        .show();
+                                            } else {
+                                                new AlertDialog.Builder(VotingDetailActivity.this)
+                                                        .setMessage(response.message())
                                                         .setOnDismissListener(new DialogInterface.OnDismissListener() {
                                                             @Override
                                                             public void onDismiss(DialogInterface dialogInterface) {
@@ -79,6 +100,7 @@ public class VotingDetailActivity extends AppCompatActivity {
 
                                         @Override
                                         public void onFailure(Call<ResponseApi> call, Throwable t) {
+                                            progressDialog.hide();
                                             new AlertDialog.Builder(VotingDetailActivity.this)
                                                     .setMessage(t.getMessage())
                                                     .setOnDismissListener(new DialogInterface.OnDismissListener() {

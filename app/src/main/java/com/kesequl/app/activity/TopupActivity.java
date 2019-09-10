@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -38,6 +39,8 @@ public class TopupActivity extends AppCompatActivity implements ZXingScannerView
     private EditText edtUsername;
     private Button btnEksekusi;
 
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +58,11 @@ public class TopupActivity extends AppCompatActivity implements ZXingScannerView
         btnEksekusi = findViewById(R.id.btn_eksekusi_barcode);
 
         edtUsername.setHint("Masukan Username Tujuan");
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading ...");
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(false);
 
         btnEksekusi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,9 +99,11 @@ public class TopupActivity extends AppCompatActivity implements ZXingScannerView
 
     private void validasiTopup(String username) {
         if (username != null && !TextUtils.isEmpty(username)) {
+            progressDialog.show();
             Client.getApi().actionCekUsername(Global.getUser().getToken(), username).enqueue(new Callback<ResponseApi>() {
                 @Override
                 public void onResponse(Call<ResponseApi> call, final Response<ResponseApi> response) {
+                    progressDialog.hide();
                     if (response.isSuccessful()) {
                         if (response.body().getStatus() == 1) {
                             View dialog_topup = getLayoutInflater().inflate(R.layout.dialog_topup, null);
@@ -121,6 +131,7 @@ public class TopupActivity extends AppCompatActivity implements ZXingScannerView
                                     .setPositiveButton("Kirim", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
+                                            progressDialog.show();
                                             Client.getApi().actionTopup(Global.getUser().getToken(), Integer.parseInt(response.body().getPesan()), listUang[spnUang.getSelectedItemPosition()]).enqueue(new Callback<ResponseApi>() {
                                                 @Override
                                                 public void onResponse(Call<ResponseApi> call, Response<ResponseApi> response) {
@@ -134,15 +145,23 @@ public class TopupActivity extends AppCompatActivity implements ZXingScannerView
                                                                     }
                                                                 })
                                                                 .show();
+                                                    } else {
+                                                        onFailure(call, new Throwable(response.message()));
                                                     }
                                                 }
 
                                                 @Override
                                                 public void onFailure(Call<ResponseApi> call, Throwable t) {
+                                                    t.printStackTrace(System.err);
                                                     new AlertDialog.Builder(TopupActivity.this)
                                                             .setMessage("Error : " + t.getMessage())
+                                                            .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                                                @Override
+                                                                public void onDismiss(DialogInterface dialogInterface) {
+                                                                    finish();
+                                                                }
+                                                            })
                                                             .show();
-                                                    finish();
                                                 }
                                             });
                                         }
@@ -156,8 +175,18 @@ public class TopupActivity extends AppCompatActivity implements ZXingScannerView
                                     })
                                     .show();
                         } else {
-                            onFailure(call, new Throwable(response.body().getPesan()));
+                            new AlertDialog.Builder(TopupActivity.this)
+                                    .setMessage(response.body().getPesan())
+                                    .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                        @Override
+                                        public void onDismiss(DialogInterface dialogInterface) {
+                                            finish();
+                                        }
+                                    })
+                                    .show();
                         }
+                    } else {
+                        onFailure(call, new Throwable(response.message()));
                     }
                 }
 
@@ -165,8 +194,14 @@ public class TopupActivity extends AppCompatActivity implements ZXingScannerView
                 public void onFailure(Call<ResponseApi> call, Throwable t) {
                     new AlertDialog.Builder(TopupActivity.this)
                             .setMessage(t.getMessage())
+                            .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                @Override
+                                public void onDismiss(DialogInterface dialogInterface) {
+
+                                    finish();
+                                }
+                            })
                             .show();
-                    finish();
                 }
             });
         }

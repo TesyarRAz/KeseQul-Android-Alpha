@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import retrofit2.Response;
 public class VotingTeamActivity extends AppCompatActivity {
     TextView txtVotingTeam;
     RecyclerView listVotingTeam;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,27 +41,43 @@ public class VotingTeamActivity extends AppCompatActivity {
         String id = intent.getStringExtra("id_event_voting");
         if (id == null)
             return;
-        
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Sedang Meloading...");
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(false);
+
         int id_event_voting = Integer.parseInt(id);
 
-        if (id_event_voting != -1)
+        if (id_event_voting != -1) {
+            progressDialog.show();
             Client.getApi().actionGetEventTeam(Global.getUser().getToken(), id_event_voting, intent.getStringExtra("password")).enqueue(new Callback<ResponseList<VotingTeam>>() {
                 @Override
                 public void onResponse(Call<ResponseList<VotingTeam>> call, Response<ResponseList<VotingTeam>> response) {
+                    progressDialog.hide();
                     if (response.isSuccessful()) {
                         if (response.body().getStatus() == 1) {
                             listVotingTeam.setAdapter(new MenuVotingAdapter(VotingTeamActivity.this, intent.getStringExtra("password"), response.body().getData()));
                         } else {
                             new AlertDialog.Builder(VotingTeamActivity.this)
-                            .setMessage(response.body().getPesan())
-                            .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                    .setMessage(response.body().getPesan())
+                                    .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                        @Override
+                                        public void onDismiss(DialogInterface dialogInterface) {
+                                            finish();
+                                        }
+                                    })
+                                    .show();
+                        }
+                    } else {
+                        new AlertDialog.Builder(VotingTeamActivity.this)
+                                .setMessage(response.message())
+                                .setOnDismissListener(new DialogInterface.OnDismissListener() {
                                     @Override
                                     public void onDismiss(DialogInterface dialogInterface) {
                                         finish();
                                     }
                                 })
-                            .show();
-                        }
+                                .show();
                     }
                 }
 
@@ -68,14 +86,15 @@ public class VotingTeamActivity extends AppCompatActivity {
                     new AlertDialog.Builder(VotingTeamActivity.this)
                             .setMessage(t.getMessage())
                             .setOnDismissListener(new DialogInterface.OnDismissListener() {
-                                    @Override
-                                    public void onDismiss(DialogInterface dialogInterface) {
-                                        finish();
-                                    }
-                                })
+                                @Override
+                                public void onDismiss(DialogInterface dialogInterface) {
+                                    finish();
+                                }
+                            })
                             .show();
                 }
             });
+        }
         else
             finish();
     }

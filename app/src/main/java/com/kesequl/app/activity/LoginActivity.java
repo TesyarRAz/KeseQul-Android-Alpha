@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                         Global.setUser(responseLogin.getData());
                         Global.getUser().setPassword(password);
 
-                        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplication());
+                        SharedPreferences sharedPreferences = getSharedPreferences("login_setting", Context.MODE_PRIVATE);
                         SharedPreferences.Editor edit = sharedPreferences.edit();
                         edit.putString("username", Global.getUser().getUsername());
                         edit.putString("password", Global.getUser().getPassword());

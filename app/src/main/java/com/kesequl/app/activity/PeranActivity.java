@@ -96,13 +96,29 @@ public class PeranActivity extends AppCompatActivity {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences sharedPreferences = getSharedPreferences("login_setting", Context.MODE_PRIVATE);
-                sharedPreferences.edit().remove("username");
-                sharedPreferences.edit().remove("password");
-                sharedPreferences.edit().apply();
 
-                Intent intent = new Intent(PeranActivity.this, LoginActivity.class);
-                startActivity(intent);
+                new AlertDialog.Builder(PeranActivity.this)
+                        .setMessage("Yakin Ingin Keluar ?")
+                        .setCancelable(false)
+                        .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                SharedPreferences sharedPreferences = getSharedPreferences("login_setting", Context.MODE_PRIVATE);
+                                sharedPreferences.edit().remove("username");
+                                sharedPreferences.edit().remove("password");
+                                sharedPreferences.edit().apply();
+
+                                Intent intent = new Intent(PeranActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        })
+                        .show();
             }
         });
     }

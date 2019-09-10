@@ -1,6 +1,7 @@
 package com.kesequl.app.activity;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -35,6 +36,8 @@ public class TransferActivity extends AppCompatActivity implements ZXingScannerV
     private EditText edtUsername;
     private Button btnEksekusi;
 
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +67,11 @@ public class TransferActivity extends AppCompatActivity implements ZXingScannerV
             }
         });
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading ...");
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(false);
+
     }
 
     @Override
@@ -92,6 +100,7 @@ public class TransferActivity extends AppCompatActivity implements ZXingScannerV
             Client.getApi().actionCekUsername(Global.getUser().getToken(), username).enqueue(new Callback<ResponseApi>() {
                 @Override
                 public void onResponse(Call<ResponseApi> call, final Response<ResponseApi> response) {
+                    progressDialog.show();
                     if (response.isSuccessful()) {
                         if (response.body().getStatus() == 1) {
                             View dialog_topup = getLayoutInflater().inflate(R.layout.dialog_topup, null);
@@ -119,9 +128,11 @@ public class TransferActivity extends AppCompatActivity implements ZXingScannerV
                                     .setPositiveButton("Kirim", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
+                                            progressDialog.show();
                                             Client.getApi().actionTransfer(Global.getUser().getToken(), Integer.parseInt(response.body().getPesan()), listUang[spnUang.getSelectedItemPosition()]).enqueue(new Callback<ResponseApi>() {
                                                 @Override
                                                 public void onResponse(Call<ResponseApi> call, Response<ResponseApi> response) {
+                                                    progressDialog.hide();
                                                     if (response.isSuccessful()) {
                                                         new AlertDialog.Builder(TransferActivity.this)
                                                                 .setMessage(response.body().getPesan())
