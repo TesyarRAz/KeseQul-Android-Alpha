@@ -71,7 +71,6 @@ public class VotingDetailActivity extends AppCompatActivity {
                                     Client.getApi().actionCoblos(Global.getUser().getToken(), intent.getStringExtra("id_nominasi_team"), intent.getStringExtra("password")).enqueue(new Callback<ResponseApi>() {
                                         @Override
                                         public void onResponse(Call<ResponseApi> call, final Response<ResponseApi> response) {
-
                                             progressDialog.hide();
                                             if (response.isSuccessful()) {
                                                 new AlertDialog.Builder(VotingDetailActivity.this)
@@ -79,8 +78,8 @@ public class VotingDetailActivity extends AppCompatActivity {
                                                         .setOnDismissListener(new DialogInterface.OnDismissListener() {
                                                             @Override
                                                             public void onDismiss(DialogInterface dialogInterface) {
-                                                                setResult(RESULT_OK, null);
-                                                                finishActivity(1);
+                                                                setResult(RESULT_OK);
+                                                                finish();
                                                             }
                                                         })
                                                         .show();
@@ -90,8 +89,7 @@ public class VotingDetailActivity extends AppCompatActivity {
                                                         .setOnDismissListener(new DialogInterface.OnDismissListener() {
                                                             @Override
                                                             public void onDismiss(DialogInterface dialogInterface) {
-                                                                setResult(RESULT_OK, null);
-                                                                finishActivity(1);
+                                                                finish();
                                                             }
                                                         })
                                                         .show();
@@ -106,8 +104,7 @@ public class VotingDetailActivity extends AppCompatActivity {
                                                     .setOnDismissListener(new DialogInterface.OnDismissListener() {
                                                                 @Override
                                                                 public void onDismiss(DialogInterface dialogInterface) {
-                                                                    setResult(RESULT_OK, null);
-                                                                    finishActivity(1);
+                                                                    finish();
                                                                 }
                                                             })
                                                     .show();

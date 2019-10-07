@@ -53,7 +53,7 @@ public class MenuVotingAdapter extends RecyclerView.Adapter<MenuVotingAdapter.Me
                 intent.putExtra("misi", team.getMisi());
                 intent.putExtra("password", password);
 
-                activity.startActivityForResult(intent, 1);
+                activity.startActivityForResult(intent, 2);
             }
         });
     }

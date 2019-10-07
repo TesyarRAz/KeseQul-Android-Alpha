@@ -1,5 +1,6 @@
 package com.kesequl.app.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -95,38 +96,34 @@ public class VotingTeamActivity extends AppCompatActivity {
                 }
             });
         }
-        else
-            finish();
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == 2) {
+            if  (resultCode == RESULT_OK)
                 finish();
-            }
         }
     }
 
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
-            .setMessage("Yakin Ingin Ke menu awal ?")
-            .setCancelable(false)
-            .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    finish();
-                }
-            })
-            .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.dismiss();
-                }
-            })
-            .show();
+                .setMessage("Yakin Ingin Ke menu awal ?")
+                .setCancelable(false)
+                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .show();
     }
 
 }
