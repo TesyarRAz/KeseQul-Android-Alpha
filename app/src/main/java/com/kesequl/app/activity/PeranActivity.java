@@ -46,6 +46,7 @@ public class PeranActivity extends AppCompatActivity {
     SwipeRefreshLayout refreshLayout;
 
     TextView txtNama;
+    ImageView imgProfile;
     TextView txtMoney;
     RecyclerView listMenuPeran;
     TextView btnLogout;
@@ -60,6 +61,7 @@ public class PeranActivity extends AppCompatActivity {
 
         refreshLayout = findViewById(R.id.refresh_peran);
         txtNama = findViewById(R.id.txt_peran_nama);
+        imgProfile = findViewById(R.id.img_peran);
         txtMoney = findViewById(R.id.txt_peran_money);
         listMenuPeran = findViewById(R.id.list_menu_peran);
         btnLogout = findViewById(R.id.btn_logout);
@@ -188,6 +190,10 @@ public class PeranActivity extends AppCompatActivity {
                         DaoData data = response.body().getData();
 
                         txtNama.setText(data.getNama());
+                        if (data.getImageLink() != null)
+                            imgPeran.setImageBitmap(
+                                BitmapFactory.decodeStream(new URL(Client.BASE_IMAGE_UPLOAD + data.getImageLink()).openConnection().getInputStream())
+                            );
                         listMenuPeran.setAdapter(new MenuPeranAdapter(PeranActivity.this, data.getResIdText(), data.getResIdImage()));
                     }
                     refreshLayout.setRefreshing(false);
