@@ -34,6 +34,9 @@ public class Siswa implements DaoData {
 
 	@SerializedName("id_siswa")
 	private String idSiswa;
+	
+	@SerializedName("image_link")
+	private String imageLink;
 
 	public void setKeterangan(Object keterangan){
 		this.keterangan = keterangan;
@@ -123,5 +126,13 @@ public class Siswa implements DaoData {
 
 	public String getIdSiswa(){
 		return idSiswa;
+	}
+	
+	public void setImageLink(String imageLink) {
+		this.imageLink = imageLink;
+	}
+	
+	public String getImageLink() {
+		return imageLink;
 	}
 }
