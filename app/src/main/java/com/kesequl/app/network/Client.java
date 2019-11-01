@@ -17,13 +17,17 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Client {
+    public static final String BASE_HOST = "https://kesequl.exposei.com/";
+    public static final String HOST_API = BASE_HOST + "Api/";
+    public static final String BASE_IMAGE_UPLOAD = BASE_HOST + "assets/upload/image/";
+    
     private static Retrofit retrofit;
     private static  ApiInterface apiInterface;
 
     public static Retrofit getConnection() {
         if (retrofit == null)
             retrofit = new Retrofit.Builder()
-                    .baseUrl("https://kesequl.exposei.com/Api/")
+                    .baseUrl(HOST_API)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
