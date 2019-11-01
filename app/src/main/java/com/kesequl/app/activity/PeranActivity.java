@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -34,6 +35,7 @@ import com.kesequl.app.model.ResponseApi;
 import com.kesequl.app.network.Client;
 
 import java.io.IOException;
+import java.net.URL;
 import java.text.NumberFormat;
 
 import retrofit2.Call;
@@ -190,10 +192,26 @@ public class PeranActivity extends AppCompatActivity {
                         DaoData data = response.body().getData();
 
                         txtNama.setText(data.getNama());
-                        if (data.getImageLink() != null)
-                            imgPeran.setImageBitmap(
-                                BitmapFactory.decodeStream(new URL(Client.BASE_IMAGE_UPLOAD + data.getImageLink()).openConnection().getInputStream())
-                            );
+                        if (data.getImageLink() != null) {
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        Bitmap bitmap = BitmapFactory.decodeStream(new URL(Client.BASE_IMAGE_UPLOAD + data.getImageLink()).openConnection().getInputStream());
+
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                imgProfile.setImageBitmap(bitmap);
+                                            }
+                                        });
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }).start();
+
+                        }
                         listMenuPeran.setAdapter(new MenuPeranAdapter(PeranActivity.this, data.getResIdText(), data.getResIdImage()));
                     }
                     refreshLayout.setRefreshing(false);

@@ -17,7 +17,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Client {
-    public static final String BASE_HOST = "https://kesequl.exposei.com/";
+//    public static final String BASE_HOST = "https://kesequl.exposei.com/";
+    public static final String BASE_HOST = "http://192.168.10.141/kesequl/";
     public static final String HOST_API = BASE_HOST + "Api/";
     public static final String BASE_IMAGE_UPLOAD = BASE_HOST + "assets/upload/image/";
     
