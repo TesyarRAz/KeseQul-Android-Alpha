@@ -2,15 +2,19 @@ package com.kesequl.app.activity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -125,6 +129,10 @@ public class PeranActivity extends AppCompatActivity {
                         .show();
             }
         });
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA))
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
     }
 
     private void createDatadiri() throws IOException {
@@ -221,7 +229,10 @@ public class PeranActivity extends AppCompatActivity {
 
         @Override
         public void onFailure(Call<ResponseApi<T>> call, Throwable t) {
-            refreshUser();
+            // refreshUser();
+            new AlertDialog.Builder(PeranActivity.this)
+                    .setMessage(t.getMessage())
+                    .show();
         }
     }
 

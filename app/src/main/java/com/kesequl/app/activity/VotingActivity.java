@@ -2,10 +2,14 @@ package com.kesequl.app.activity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -43,6 +47,10 @@ public class VotingActivity extends AppCompatActivity implements ZXingScannerVie
         btnEksekusi = findViewById(R.id.btn_eksekusi_barcode);
 
         edtPassword.setHint("Masukan Password Tujuan");
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA))
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
 
         btnEksekusi.setOnClickListener(new View.OnClickListener() {
             @Override
